@@ -80,3 +80,11 @@ yarn add @fortawesome/free-regular-svg-icons
 yarn add @fortawesome/react-fontawesome@latest
 
 2 - after that you can use any icon or item from fontawesome
+
+*******
+Dates search range
+1 - import the library from github
+from hypeserver.github.io/react-date-range
+ - we use import { DateRange} from 'react-date-range'
+ first install it using: yarn add react-date-range
+ install also: yarn add date-fns
