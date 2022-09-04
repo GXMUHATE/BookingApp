@@ -54,8 +54,7 @@ const Hotel = () => {
         <div>
             <Navbar/>
             <Header type="list"/>
-            <div className="hotelContainer">
-                {open && <div className="slider">
+            {open && <div className="slider">
                     <FontAwesomeIcon icon={faCircleXmark} className="close" onClick={()=>setOpen(false)}/>
                     <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow" onClick={()=>handleMove("l")}/>
                     <div className="sliderWrapper">
@@ -63,6 +62,7 @@ const Hotel = () => {
                     </div>
                     <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" onClick={()=>handleMove("r")}/>
                 </div>}
+            <div className="hotelContainer">
                 <div className="hotelWrapper">
                     <button className="bookNow">Reserve or Book Now!</button>
                     <h1 className="hotelTitle">Grand Hotel</h1>
