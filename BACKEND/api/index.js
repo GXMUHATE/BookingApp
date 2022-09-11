@@ -24,10 +24,17 @@ mongoose.connection.on("disconnected", ()=> {
 })
 
 //middlewares
+
+app.use(express.json())
+
 app.use("/api/auth", authRoute)
 app.use("/api/users", usersRoute)
 app.use("/api/hotels", hotelsRoute)
 app.use("/api/rooms", roomsRoute)
+
+app.use((err, req, res, next)=>{
+    return res.status(500).json("Hello error from handler")
+})
 
 app.listen(8800, ()=> {
     connect()
