@@ -1,48 +1,34 @@
+import useFetch from "../hooks/useFetch"
 import "./featuredProperties.css"
 
 const FeaturedProperties = () => {
+
+    const { data, loading, error } = useFetch("hotels?featured=true&limit=4")
+
+    // require('../../images/f1.jpeg')
+    // require('../../images/f2.jpeg')
+    // require('../../images/f3.jpeg')
+    // require('../../images/f4.jpeg')
     return (
         <div className="fp">
-            <div className="fpItem">
-                <img src={require('../../images/f1.jpeg')} alt="" className="fpImg" />
-                <span className="fpName">ApartHotel Satre Masto</span>
-                <span className="fpCity">Madrid</span>
-                <span className="fpPrice">Starting from $125</span>
-                <div className="fpRating">
-                    <button>7.5</button>
+            { loading ? ("Loading") : (
+            <>
+            {data.map((item) => (
+            <div className="fpItem" key={item._id}>
+                <img src={item.photos[0]} alt="" className="fpImg" />
+                <span className="fpName">{item.name}</span>
+                <span className="fpCity">{item.city}</span>
+                <span className="fpPrice">Starting from {item.cheapestPrice}</span>
+                {item.rating && <div className="fpRating">
+                    <button>{item.rating}</button>
                     <span>Excellent</span>
                 </div>
+                }
             </div>
-            <div className="fpItem">
-                <img src={require('../../images/f2.jpeg')} alt="" className="fpImg" />
-                <span className="fpName">ApartHotel Satre Masto</span>
-                <span className="fpCity">Madrid</span>
-                <span className="fpPrice">Starting from $125</span>
-                <div className="fpRating">
-                    <button>7.5</button>
-                    <span>Excellent</span>
-                </div>
-            </div>
-            <div className="fpItem">
-                <img src={require('../../images/f3.jpeg')} alt="" className="fpImg" />
-                <span className="fpName">ApartHotel Satre Masto</span>
-                <span className="fpCity">Madrid</span>
-                <span className="fpPrice">Starting from $125</span>
-                <div className="fpRating">
-                    <button>7.5</button>
-                    <span>Excellent</span>
-                </div>
-            </div>
-            <div className="fpItem">
-                <img src={require('../../images/f4.jpeg')} alt="" className="fpImg" />
-                <span className="fpName">ApartHotel Satre Masto</span>
-                <span className="fpCity">Madrid</span>
-                <span className="fpPrice">Starting from $125</span>
-                <div className="fpRating">
-                    <button>7.5</button>
-                    <span>Excellent</span>
-                </div>
-            </div>
+            ))}
+            </>
+            )}
+            
         </div>
     )
 }
