@@ -26,7 +26,14 @@ const Reserve = ({setOpen, hotelId}) => {
         return dates
     }
 
-    console.log(getDatesInRange(dates[0].startDate, dates[0].endDate))
+    const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate)
+
+    const isAvailable = (roomNumber) => {
+        const isFound = roomNumber.unavailableDates.some((date) => 
+        alldates.include(new Date(date).getTime())
+        )
+        return !isFound
+    }
 
     const handleSelect = (e)=>{
         const checked = e.target.checked;
@@ -38,9 +45,8 @@ const Reserve = ({setOpen, hotelId}) => {
         )
     }
 
-    const handleClick = ()=> {
+    const handleClick = ()=> {}
 
-    }
     return (
         <div className="reserve">
             <div className="rContainer">
@@ -58,12 +64,16 @@ const Reserve = ({setOpen, hotelId}) => {
                             <div className="rMax">Max people: <b>{item.maxPeople}</b></div>
                             <div className="rPrice">{item.price}</div>
                         </div>
+                        <div className="rSelectRooms">
                         {item.roomNumbers.map((roomNumber)=> (
-                        <div className="room">
+                            <div className="room">
                             <label>{roomNumber.number}</label>
-                            <input type="checkbox" value={roomNumber._id} onChange = {handleSelect}/>
+                            <input type="checkbox" value={roomNumber._id} 
+                            onChange = {handleSelect}
+                            disabled={!isAvailable(roomNumber)}/>
                         </div>
                         ))}
+                        </div>
                     </div>
                 ))}
                 <button onClick={handleClick} className="rButton">Reserve Now!</button>
